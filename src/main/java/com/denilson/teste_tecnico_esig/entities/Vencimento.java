@@ -22,4 +22,36 @@ public class Vencimento {
 
     @Enumerated(EnumType.STRING)
     private TipoVencimento tipoVencimento;
+
+    public Vencimento() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
+    public TipoVencimento getTipoVencimento() {
+        return tipoVencimento;
+    }
+
+    public void setTipoVencimento(TipoVencimento tipoVencimento) {
+        this.tipoVencimento = tipoVencimento;
+    }
 }

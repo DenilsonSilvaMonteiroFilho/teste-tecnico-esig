@@ -19,4 +19,27 @@ public class CargoVencimento {
     @ManyToOne
     @JoinColumn(name = "vencimento_id", nullable = false)
     private Vencimento vencimento;
+
+    public CargoVencimento() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
+
+    public Vencimento getVencimento() {
+        return vencimento;
+    }
+
+    public void setVencimento(Vencimento vencimento) {
+        this.vencimento = vencimento;
+    }
 }
