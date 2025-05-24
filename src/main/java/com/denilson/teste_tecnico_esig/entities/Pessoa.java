@@ -2,14 +2,13 @@ package com.denilson.teste_tecnico_esig.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity(name = "pessoa")
@@ -35,10 +34,10 @@ public class Pessoa {
     private String telefone;
 
     @Column(name = "data_nascimento")
-    private Date dataNascimento;
+    private String dataNascimento;
 
     @ManyToOne
-    @JoinColumn(name = "cargo_id", nullable = false)
+    @JoinColumn(name = "cargo_id")
     private Cargo cargo;
 
     public Pessoa() {
@@ -113,11 +112,11 @@ public class Pessoa {
         this.telefone = telefone;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
