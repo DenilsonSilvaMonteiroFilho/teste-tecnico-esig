@@ -6,6 +6,7 @@ import com.denilson.teste_tecnico_esig.entities.Pessoa;
 import com.denilson.teste_tecnico_esig.entities.PessoaSalarioConsolidado;
 import com.denilson.teste_tecnico_esig.entities.Vencimento;
 import com.denilson.teste_tecnico_esig.repositories.PessoaSalarioConsolidadoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,7 @@ public class ConsolidadorService {
 
 
     //PODE SER IMPLMENTADO UM @TRASASIONAL PRA PREVINIR ERROS
+    @Transactional
     public List<PessoaSalarioConsolidado> consolidarCargoVencimento() {
 
         List<Pessoa> pessoas = pessoaService.findAll();

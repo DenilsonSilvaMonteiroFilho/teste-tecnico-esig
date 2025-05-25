@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Sistema de Administração</title>
+    <meta charset="UTF-8" />
+</h:head>
+
+<h:body>
+    <h:form>
+        <p:menubar>
+            <p:menuitem value="Pessoa" outcome="/views/pessoa" icon="pi pi-user" />
+            <p:menuitem value="Cargo" outcome="/views/cargo" icon="pi pi-briefcase" />
+            <p:menuitem value="Vencimento" outcome="/views/vencimento" icon="pi pi-dollar" />
+            <p:menuitem value="Cargo Vencimento" outcome="/views/cargoVencimento" icon="pi pi-list" />
+            <p:menuitem value="Consolidar" outcome="/views/consolidar" icon="pi pi-chart-bar" />
+        </p:menubar>
+    </h:form>
+
+    <div style="margin:20px">
+        <ui:insert name="conteudo"/>
+    </div>
+</h:body>
+</html>
