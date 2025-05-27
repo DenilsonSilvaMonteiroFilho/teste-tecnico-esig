@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/templates/layout.xhtml">
+    <ui:define name="conteudo">
+
+        <h:form id="formPessoa">
+
+            <p:commandButton value="Nova Pessoa" icon="pi pi-plus"
+                             action="#{pessoaBean.novo}"
+                             update=":dialogPessoa" oncomplete="PF('dlgPessoa').show()"/>
+
+            <p:dataTable id="tabelaPessoas"
+                         value="#{pessoaBean.pessoas}" var="p"
+                         paginator="true" rows="10" rowsPerPageTemplate="10,20,50"
+                         styleClass="mt-3" responsiveLayout="scroll">
+
+                <p:column headerText="ID">
+                    <h:outputText value="#{p.id}"/>
+                </p:column>
+                <p:column headerText="Nome">
+                    <h:outputText value="#{p.nome}"/>
+                </p:column>
+                <p:column headerText="Email">
+                    <h:outputText value="#{p.email}"/>
+                </p:column>
+                <p:column headerText="Cargo">
+                    <h:outputText value="#{p.cargo.nome}"/>
+                </p:column>
+                <p:column headerText="Ações">
+                    <p:commandButton icon="pi pi-pencil" title="Editar"
+                                     action="#{pessoaBean.editar(p)}"
+                                     update=":dialogPessoa" oncomplete="PF('dlgPessoa').show()"/>
+                <!-- -->
+                    <p:commandButton icon="pi pi-trash" title="Excluir"
+                                     action="#{pessoaBean.setPessoaSelecionada(p)}"
+                                     update=":confirmDialog" oncomplete="PF('dlgConfirm').show()" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+        <!-- Dialog de Pessoa -->
+        <p:dialog header="Cadastro de Pessoa" widgetVar="dlgPessoa" id="dialogPessoa"
+                  modal="true" resizable="false" closable="true" draggable="true" width="500"
+                  style="max-height: 90vh; overflow-y: auto;">
+            <h:form id="formDialog">
+                <p:messages id="msgs" autoUpdate="true" showDetail="true" closable="true" />
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel value="Nome:"/>
+                    <p:inputText value="#{pessoaBean.pessoa.nome}" required="true"/>
+
+                    <h:outputLabel value="Email:"/>
+                    <p:inputText value="#{pessoaBean.pessoa.email}"/>
+
+                    <h:outputLabel value="Telefone:"/>
+                    <p:inputText value="#{pessoaBean.pessoa.telefone}"/>
+
+                    <h:outputLabel value="Endereço:"/>
+                    <p:inputText value="#{pessoaBean.pessoa.endereco}"/>
+
+                    <h:outputLabel value="Cidade:"/>
+                    <p:inputText value="#{pessoaBean.pessoa.cidade}"/>
+
+                    <h:outputLabel value="CEP:"/>
+                    <p:inputText value="#{pessoaBean.pessoa.cep}"/>
+
+                    <h:outputLabel value="País:"/>
+                    <p:inputText value="#{pessoaBean.pessoa.pais}"/>
+
+                    <h:outputLabel value="Usuário:"/>
+                    <p:inputText value="#{pessoaBean.pessoa.usuario}"/>
+
+                    <h:outputLabel value="Nascimento:"/>
+                    <p:inputText value="#{pessoaBean.pessoa.dataNascimento}"/>
+
+                    <h:outputLabel value="Cargo:" for="cargo" />
+                    <p:selectOneMenu id="cargo"
+                                     value="#{pessoaBean.idCargoSelecionado}"
+                                     style="width:100%" required="true">
+                        <f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{pessoaBean.cargos}" var="c" itemLabel="#{c.nome}" itemValue="#{c.id}"/>
+                    </p:selectOneMenu>
+
+                </h:panelGrid>
+
+                <p:commandButton value="Salvar"
+                                 action="#{pessoaBean.salvar}"
+                                 process="@form"
+                                 update=":formPessoa :formDialog :formDialog:msgs"
+                                 oncomplete="if (!args.validationFailed) PF('dlgPessoa').hide()"/>
+
+            </h:form>
+        </p:dialog>
+
+
+        <!-- Dialog de Confirmação -->
+        <p:confirmDialog widgetVar="dlgConfirm" id="confirmDialog" header="Confirmação"
+                         message="Deseja realmente excluir esta pessoa?" severity="warn" closable="false">
+            <h:form>
+                <p:commandButton value="Sim" icon="pi pi-check"
+                                 action="#{pessoaBean.excluir(pessoaBean.pessoaSelecionada.id)}"
+                                 update=":formPessoa" oncomplete="PF('dlgConfirm').hide()" />
+                <p:commandButton value="Não" icon="pi pi-times" onclick="PF('dlgConfirm').hide()" type="button"/>
+            </h:form>
+        </p:confirmDialog>
+
+    </ui:define>
+</ui:composition>
+</html>

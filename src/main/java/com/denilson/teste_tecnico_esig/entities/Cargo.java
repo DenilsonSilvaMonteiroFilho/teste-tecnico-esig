@@ -29,4 +29,18 @@ public class Cargo {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cargo cargo = (Cargo) o;
+        return id != null && id.equals(cargo.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
+    }
+
 }
